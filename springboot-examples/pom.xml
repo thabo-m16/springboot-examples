@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         <modelVersion>4.0.0</modelVersion>
+
+         <!--This is the parent pom file and all declarations here will be inherited in the child pom-->
+         <!--This is to promote reusable poms-->
+         <groupId>info.ejava.examples</groupId>
+         <artifactId>springboot-examples</artifactId>
+         <version>0.0.1-SNAPSHOT</version>
+         <packaging>pom</packaging>
+
+         <!--Spring Boot version property and is a place where you define variables.-->
+         <properties>
+         <springboot.version>3.2.4</springboot.version>
+         <spring-boot.classifier>bootexec</spring-boot.classifier>
+         </properties>
+        
+        <!--The pluginManagement will only be used on parent pom's-->
+        <build>
+          <pluginManagement>
+            <plugins>  <!--Plugins is used on child poms-->
+              <plugin>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-maven-plugin</artifactId>
+               <configuration>
+                 <classifier>${spring-boot.classifier}</classifier><!-- is meant to label sibling artifacts to the original Java JAR for the module.-->
+               </configuration>
+               <executions>
+                 <execution>
+                   <id>build-app</id> <!--used to decsribe execution and required when having more than one-->
+                   <phase>package</phase><!--identifies the maven goal in which this plugin runs-->
+                   <goals>
+                     <goal>repackage</goal> <!--identifies the goal to execute within the spring maven plugin-->
+                   </goals><!--The package is the default maven plugin, so we have to redifine it to execute from the spring maven plugin-->
+                 </execution>
+               </executions>
+              </plugin>
+            </plugins>
+          </pluginManagement> 
+        </build>
+        <!--Plugin creates an executable jar and if defined here it will apply in every child pom-->
+
+        <!--Import Spring Boot dependency versions (dependencies are a bunch of libraries)-->
+         <dependencyManagement>
+            <dependencies>
+               <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-dependencies</artifactId> <!--refers to the parent POM (Project Object Model) that manages the version numbers for all official Spring Boot dependencies.-->
+                  <version>3.2.4</version>
+                  <type>pom</type> <!--Use type along with scope under dependency management. This is to specify that the type is not a jar default but rather a pom file that will be used for inheritance-->
+                  <scope>import</scope> 
+               </dependency>
+            </dependencies>
+         </dependencyManagement>
+
+         <modules>
+           <module>springboot-app-example</module>
+         </modules>
+
+
+
+</project>

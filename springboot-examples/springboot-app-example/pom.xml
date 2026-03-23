@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         <modelVersion>4.0.0</modelVersion>
+
+         <groupId>info.ejava.examples.app</groupId>
+          <artifactId>springboot-app-example</artifactId>
+
+         <parent>
+           <groupId>info.ejava.examples</groupId>
+           <artifactId>springboot-examples</artifactId>
+           <version>0.0.1-SNAPSHOT</version>
+         </parent>
+
+         <packaging>jar</packaging>
+
+         <dependencies>
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter</artifactId> <!--Selects the specific dependency in the child pom-->
+            </dependency>
+         </dependencies>
+
+      <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                  <execution>
+                    <id>run-application</id> 
+                    <phase>integration-test</phase>
+                    <goals>
+                      <goal>run</goal>
+                    </goals>
+                    <configuration>
+                      <arguments>Maven,plugin-supplied,args</arguments> <!--This is printed out in the list.of(args)-->
+                    </configuration>
+                  </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>         

@@ -1,0 +1,2 @@
+The purpose of the two POM FILES is to display how inheritance works in between the files.
+In Spring Boot (and build tools like Maven/Gradle), the primary difference is that dependencies are libraries used by your application's source code, while plugins are tools that extend the build system's functionality during the build lifecycle.
